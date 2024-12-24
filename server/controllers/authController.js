@@ -13,7 +13,7 @@ const passlogin = async (req, res) => {
     const user = await User.findOne({
       where: {
         id: userid,
-      }
+      },
     });
 
     req.session.user = {
@@ -24,15 +24,14 @@ const passlogin = async (req, res) => {
 
     // Optionally handle what happens if no user is found
     if (!sample) {
-      console.log('User not found');
+      console.log("User not found");
     }
-
   } catch (error) {
-    console.log('Database error:', error);
+    console.log("Database error:", error);
   }
 
   res.redirect(`${process.env.FRONT_URL}/main`);
-}
+};
 
 const kakaoLogin = async (req, res) => {
   const { code } = req.query;
@@ -114,7 +113,6 @@ const logout = async (req, res) => {
       if (err) {
         console.log(err);
         return res.status(500).send("로그아웃 처리 중 오류가 발생했습니다.");
-      
       }
       res.clearCookie("connect.sid"); // 세션 쿠키도 지우기
       res.redirect("http://15.165.204.99:5173/");
